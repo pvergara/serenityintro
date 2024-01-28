@@ -4,7 +4,6 @@ import org.ecos.logic.serenity_intro.page.LoginPage;
 import org.ecos.logic.serenity_intro.page.ProductPage;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.openqa.selenium.WebElement;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -23,9 +22,8 @@ class AppTest
         loginPage.getPassword().sendKeys("secret_sauce");
         loginPage.getLoginButton().click();
 
-        WebElement getProductTitle = productPage.getProductTitle();
+        String getProductTitle = productPage.getProductTitle().getText();
 
-
-        assertThat(getProductTitle.getText()).isEqualTo("Products");
+        assertThat(getProductTitle).isEqualTo("Products");
     }
 }
