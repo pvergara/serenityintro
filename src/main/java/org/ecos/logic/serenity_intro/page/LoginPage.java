@@ -2,8 +2,8 @@ package org.ecos.logic.serenity_intro.page;
 
 import net.serenitybdd.annotations.DefaultUrl;
 import net.serenitybdd.core.pages.PageObject;
+import net.serenitybdd.core.pages.WebElementFacade;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 
 @DefaultUrl("https://www.saucedemo.com/")
 public class LoginPage extends PageObject {
@@ -11,15 +11,15 @@ public class LoginPage extends PageObject {
     private static final By PASSWORD_INPUT = By.id("password");
     private static final By LOGIN_BUTTON = By.id("login-button");
 
-    public WebElement getUserName(){
+    public WebElementFacade getUserName(){
         return this.find(USERNAME_INPUT);
     }
 
-    public WebElement getPassword(){
+    public WebElementFacade getPassword(){
         return this.find(PASSWORD_INPUT);
     }
 
-    public WebElement getLoginButton(){
+    public WebElementFacade getLoginButton(){
         return this.find(LOGIN_BUTTON);
     }
 }
