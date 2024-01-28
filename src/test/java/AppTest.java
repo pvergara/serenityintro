@@ -1,10 +1,10 @@
 import net.serenitybdd.annotations.Managed;
 import net.serenitybdd.core.pages.PageObject;
 import net.serenitybdd.junit5.SerenityJUnit5Extension;
+import org.ecos.logic.serenity_intro.page.LoginPage;
+import org.ecos.logic.serenity_intro.page.ProductPage;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -12,24 +12,21 @@ import static org.assertj.core.api.Assertions.assertThat;
 @ExtendWith(SerenityJUnit5Extension.class)
 class AppTest extends PageObject
 {
-    @Managed(options = "start-maximized")
-    WebDriver driver;
-
+    @Managed
+    LoginPage loginPage;
+    @Managed
+    ProductPage productPage;
     @Test
-    void accessWikipedia(){
-        openUrl("https://www.saucedemo.com/");
+    void checkTheStandardLoginAction(){
+        loginPage.open();
 
-        WebElement userNameSelector = driver.findElement(By.id("user-name"));
-        WebElement passwordSelector = driver.findElement(By.id("password"));
-        WebElement loginButtonSelector = driver.findElement(By.id("login-button"));
+        loginPage.getUserName().sendKeys("standard_user");
+        loginPage.getPassword().sendKeys("secret_sauce");
+        loginPage.getLoginButton().click();
 
-        userNameSelector.sendKeys("performance_glitch_user");
-        passwordSelector.sendKeys("secret_sauce");
-        loginButtonSelector.click();
-
-        WebElement productSelector = driver.findElement(By.className("title"));
+        WebElement getProductTitle = productPage.getProductTitle();
 
 
-        assertThat(productSelector.getText()).isEqualTo("Products");
+        assertThat(getProductTitle.getText()).isEqualTo("Products");
     }
 }
