@@ -18,7 +18,7 @@ class AppTest
     void checkTheStandardLoginAction(){
         loginPage.open();
 
-        loginPage.getUserName().sendKeys("standard_user");
+        loginPage.getUserName().sendKeys("performance_glitch_user");
         loginPage.getPassword().sendKeys("secret_sauce");
         loginPage.getLoginButton().click();
 
