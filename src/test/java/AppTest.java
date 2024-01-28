@@ -12,7 +12,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @ExtendWith(SerenityJUnit5Extension.class)
 class AppTest extends PageObject
 {
-    @Managed
+    @Managed(options = "start-maximized")
     WebDriver driver;
 
     @Test
