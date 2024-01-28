@@ -1,5 +1,4 @@
 import net.serenitybdd.annotations.Managed;
-import net.serenitybdd.core.pages.PageObject;
 import net.serenitybdd.junit5.SerenityJUnit5Extension;
 import org.ecos.logic.serenity_intro.page.LoginPage;
 import org.ecos.logic.serenity_intro.page.ProductPage;
@@ -10,7 +9,7 @@ import org.openqa.selenium.WebElement;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(SerenityJUnit5Extension.class)
-class AppTest extends PageObject
+class AppTest
 {
     @Managed
     LoginPage loginPage;
