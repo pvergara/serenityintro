@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.ecos.logic.serenity_intro.data.Users.STANDARD;
 
 @ExtendWith(SerenityJUnit5Extension.class)
 class AppTest
@@ -18,16 +19,14 @@ class AppTest
 
     @Test
     void checkTheStandardLoginAction(){
-        WebElementFacade productTitle = productPage.getProductTitle();
         loginPage.open();
 
-        loginPage.getUserName().sendKeys("performance_glitch_user");
-        loginPage.getPassword().sendKeys("secret_sauce");
-
-        productTitle.shouldNotBeVisible();
+        loginPage.getUserName().sendKeys(STANDARD.getUsername());
+        loginPage.getPassword().sendKeys(STANDARD.getPassword());
 
         loginPage.getLoginButton().click();
 
+        WebElementFacade productTitle = productPage.getProductTitle();
         productTitle.shouldBeVisible();
 
         assertThat(productTitle.getText()).isEqualTo("Products");
