@@ -1,6 +1,7 @@
 import net.serenitybdd.annotations.Managed;
 import net.serenitybdd.core.pages.WebElementFacade;
 import net.serenitybdd.junit5.SerenityJUnit5Extension;
+import org.ecos.logic.serenity_intro.data.User;
 import org.ecos.logic.serenity_intro.page.LoginPage;
 import org.ecos.logic.serenity_intro.page.ProductPage;
 import org.junit.jupiter.api.Test;
@@ -22,9 +23,7 @@ class AppTest
     void checkTheStandardLoginAction(){
         loginPage.open();
 
-        loginPage.getUserName().sendKeys(STANDARD.getUsername());
-        loginPage.getPassword().sendKeys(STANDARD.getPassword());
-        loginPage.getLoginButton().click();
+        loginAction(STANDARD);
 
 
         WebElementFacade productTitle = productPage.getProductTitle();
@@ -37,14 +36,18 @@ class AppTest
     void checkThePerformanceGlitchLoginAction(){
         loginPage.open();
 
-        loginPage.getUserName().sendKeys(PERFORMANCE_GLITCH.getUsername());
-        loginPage.getPassword().sendKeys(PERFORMANCE_GLITCH.getPassword());
-        loginPage.getLoginButton().click();
+        loginAction(PERFORMANCE_GLITCH);
 
 
         WebElementFacade productTitle = productPage.getProductTitle();
         productTitle.shouldBeVisible();
 
         assertThat(productTitle.getText()).isEqualTo("Products");
+    }
+
+    private void loginAction(User user) {
+        loginPage.getUserName().sendKeys(user.getUsername());
+        loginPage.getPassword().sendKeys(user.getPassword());
+        loginPage.getLoginButton().click();
     }
 }
