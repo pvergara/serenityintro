@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.ecos.logic.serenity_intro.data.Users.PERFORMANCE_GLITCH;
 import static org.ecos.logic.serenity_intro.data.Users.STANDARD;
 
 @ExtendWith(SerenityJUnit5Extension.class)
@@ -23,8 +24,23 @@ class AppTest
 
         loginPage.getUserName().sendKeys(STANDARD.getUsername());
         loginPage.getPassword().sendKeys(STANDARD.getPassword());
-
         loginPage.getLoginButton().click();
+
+
+        WebElementFacade productTitle = productPage.getProductTitle();
+        productTitle.shouldBeVisible();
+
+        assertThat(productTitle.getText()).isEqualTo("Products");
+    }
+
+    @Test
+    void checkThePerformanceGlitchLoginAction(){
+        loginPage.open();
+
+        loginPage.getUserName().sendKeys(PERFORMANCE_GLITCH.getUsername());
+        loginPage.getPassword().sendKeys(STANDARD.getPassword());
+        loginPage.getLoginButton().click();
+
 
         WebElementFacade productTitle = productPage.getProductTitle();
         productTitle.shouldBeVisible();
