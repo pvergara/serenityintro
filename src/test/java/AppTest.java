@@ -38,7 +38,7 @@ class AppTest
         loginPage.open();
 
         loginPage.getUserName().sendKeys(PERFORMANCE_GLITCH.getUsername());
-        loginPage.getPassword().sendKeys(STANDARD.getPassword());
+        loginPage.getPassword().sendKeys(PERFORMANCE_GLITCH.getPassword());
         loginPage.getLoginButton().click();
 
 
