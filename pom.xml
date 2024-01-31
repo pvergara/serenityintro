@@ -37,6 +37,46 @@
     <build>
         <plugins>
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.0.0-M5</version>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <version>3.0.0-M5</version>
+                <configuration>
+                    <includes>
+                        <include>**/*Test.java</include>
+                        <include>**/Test*.java</include>
+                        <include>**/*TestSuite.java</include>
+                        <include>**/When*.java</include>
+                    </includes>
+
+                    <parallel>all</parallel>
+                    <useUnlimitedThreads>true</useUnlimitedThreads>
+                    <systemPropertyVariables>
+                        <fouser>RT95583</fouser>
+                        <fopassword>Hipopotamo73%</fopassword>
+                        <nef_non_prod_user>NEF_NON_PROD</nef_non_prod_user>
+                        <nef_non_prod_password>6Jz6w6ga6vH42e8F</nef_non_prod_password>
+                    </systemPropertyVariables>
+
+
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>integration-test</goal>
+                            <goal>verify</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
                 <groupId>net.serenity-bdd.maven.plugins</groupId>
                 <artifactId>serenity-maven-plugin</artifactId>
                 <version>${serenity.maven.version}</version>
@@ -57,6 +97,7 @@
                     </execution>
                 </executions>
             </plugin>
+
         </plugins>
 
     </build>

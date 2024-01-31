@@ -15,7 +15,7 @@ import static org.ecos.logic.serenity_intro.data.Users.STANDARD;
 class AppTest
 {
     public static final String PRODUCTS = "Products";
-    public static final String BACK_TO_PRODUCTS = "Back to products";
+    public static final String BACK_TO_PRODUCTS = "Back to prod ucts";
     @Managed
     LoginAction loginAction;
     @Managed
