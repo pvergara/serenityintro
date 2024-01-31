@@ -23,47 +23,38 @@ class AppTest
 
     @Test
     void checkTheStandardLoginAction(){
-        //Arrange
-        this.loginAction.openThePage();
-
-        //Act
-        this.loginAction.as(STANDARD);
-
-        //Assertions
-        String productTitle = this.productPageAction.getProductTitleText();
-
-        Serenity.reportThat("Then I validate I'm on the product page",()->assertThat(productTitle).isEqualTo("Products"));
-    }
-
-    @Test
-    void checkThePerformanceGlitchLoginAction(){
-        //Arrange
-        this.loginAction.openThePage();
-
-        //Act
-        this.loginAction.as(PERFORMANCE_GLITCH);
-
-        //Assertions
-        String productTitle = this.productPageAction.getProductTitleText();
-
-        Serenity.reportThat("Then I validate I'm on the product page",()->assertThat(productTitle).isEqualTo("Products"));
-    }
-
-    @Test
-    void accessingToAGivenProductDetail(){
-        //Arrange
         this.loginAction.
             openThePage().
             as(STANDARD);
 
+        String productTitle = this.productPageAction.getProductTitleText();
 
+        Serenity.reportThat("Then I validate I'm on the product page",()->
+            assertThat(productTitle).isEqualTo("Products"));
+    }
+
+    @Test
+    void checkThePerformanceGlitchLoginAction(){
+        this.loginAction.
+            openThePage().
+            as(PERFORMANCE_GLITCH);
+
+        String productTitle = this.productPageAction.getProductTitleText();
+        Serenity.reportThat("Then I validate I'm on the product page",()->
+            assertThat(productTitle).isEqualTo("Products"));
+    }
+
+    @Test
+    void accessingToAGivenProductDetail(){
+        this.loginAction.
+            openThePage().
+            as(STANDARD);
         this.productPageAction.getProductTitleText();
 
-        //Act
         productPageAction.clickOnTheItem(0);
 
-        //Assertions
-        Serenity.reportThat("Then I validate I can ensure I'm on the detail page",()->assertThat(productDetailPage.getTitleItem().shouldBeVisible().getText()).isEqualTo("Back to products"));
+        Serenity.reportThat("Then I validate I can ensure I'm on the detail page",()->
+            assertThat(productDetailPage.getTitleItem().shouldBeVisible().getText()).isEqualTo("Back to products"));
     }
 
 }
