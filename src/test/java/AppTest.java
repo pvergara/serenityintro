@@ -61,7 +61,7 @@ class AppTest
         productTitle.shouldBeVisible();
 
         //Act
-        productPage.getFirstItem().click();
+        productPage.getItemList().get(0).click();
 
         //Assertions
         WebElementFacade title = productDetailPage.getTitleItem();
