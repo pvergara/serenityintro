@@ -1,9 +1,9 @@
 import net.serenitybdd.annotations.Managed;
-import net.serenitybdd.core.pages.WebElementFacade;
+import net.serenitybdd.core.Serenity;
 import net.serenitybdd.junit5.SerenityJUnit5Extension;
 import org.ecos.logic.serenity_intro.action.LoginAction;
+import org.ecos.logic.serenity_intro.action.ProductDetailAction;
 import org.ecos.logic.serenity_intro.page.ProductDetailPage;
-import org.ecos.logic.serenity_intro.page.ProductPage;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
@@ -15,59 +15,55 @@ import static org.ecos.logic.serenity_intro.data.Users.STANDARD;
 class AppTest
 {
     @Managed
-    LoginAction login;
+    LoginAction loginAction;
     @Managed
-    ProductPage productPage;
+    ProductDetailAction productPageAction;
     @Managed
     private ProductDetailPage productDetailPage;
 
     @Test
     void checkTheStandardLoginAction(){
         //Arrange
-        this.login.openThePage();
+        this.loginAction.openThePage();
 
         //Act
-        this.login.as(STANDARD);
+        this.loginAction.as(STANDARD);
 
         //Assertions
-        WebElementFacade productTitle = productPage.getProductTitle();
-        productTitle.shouldBeVisible();
+        String productTitle = this.productPageAction.getProductTitleText();
 
-        assertThat(productTitle.getText()).isEqualTo("Products");
+        Serenity.reportThat("Then I validate I'm on the product page",()->assertThat(productTitle).isEqualTo("Products"));
     }
 
     @Test
     void checkThePerformanceGlitchLoginAction(){
         //Arrange
-        this.login.openThePage();
+        this.loginAction.openThePage();
 
         //Act
-        this.login.as(PERFORMANCE_GLITCH);
+        this.loginAction.as(PERFORMANCE_GLITCH);
 
         //Assertions
-        WebElementFacade productTitle = productPage.getProductTitle();
-        productTitle.shouldBeVisible();
+        String productTitle = this.productPageAction.getProductTitleText();
 
-        assertThat(productTitle.getText()).isEqualTo("Products");
+        Serenity.reportThat("Then I validate I'm on the product page",()->assertThat(productTitle).isEqualTo("Products"));
     }
 
     @Test
     void accessingToAGivenProductDetail(){
         //Arrange
-        this.login.
+        this.loginAction.
             openThePage().
             as(STANDARD);
 
 
-        WebElementFacade productTitle = productPage.getProductTitle();
-        productTitle.shouldBeVisible();
+        this.productPageAction.getProductTitleText();
 
         //Act
-        productPage.getItemList().get(0).click();
+        productPageAction.clickOnTheItem(0);
 
         //Assertions
-        WebElementFacade title = productDetailPage.getTitleItem();
-        assertThat(title.getText()).isEqualTo("Back to products");
+        Serenity.reportThat("Then I validate I can ensure I'm on the detail page",()->assertThat(productDetailPage.getTitleItem().shouldBeVisible().getText()).isEqualTo("Back to products"));
     }
 
 }
