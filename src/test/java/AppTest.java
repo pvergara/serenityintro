@@ -14,6 +14,8 @@ import static org.ecos.logic.serenity_intro.data.Users.STANDARD;
 @ExtendWith(SerenityJUnit5Extension.class)
 class AppTest
 {
+    public static final String PRODUCTS = "Products";
+    public static final String BACK_TO_PRODUCTS = "Back to products";
     @Managed
     LoginAction loginAction;
     @Managed
@@ -30,7 +32,7 @@ class AppTest
         String productTitle = this.productPageAction.getProductTitleText();
 
         Serenity.reportThat("Then I validate I'm on the product page",()->
-            assertThat(productTitle).isEqualTo("Products"));
+            assertThat(productTitle).isEqualTo(PRODUCTS));
     }
 
     @Test
@@ -41,7 +43,7 @@ class AppTest
 
         String productTitle = this.productPageAction.getProductTitleText();
         Serenity.reportThat("Then I validate I'm on the product page",()->
-            assertThat(productTitle).isEqualTo("Products"));
+            assertThat(productTitle).isEqualTo(PRODUCTS));
     }
 
     @Test
@@ -54,7 +56,7 @@ class AppTest
         productPageAction.clickOnTheItem(0);
 
         Serenity.reportThat("Then I validate I can ensure I'm on the detail page",()->
-            assertThat(productDetailPage.getTitleItem().shouldBeVisible().getText()).isEqualTo("Back to products"));
+            assertThat(productDetailPage.getTitleItem().shouldBeVisible().getText()).isEqualTo(BACK_TO_PRODUCTS));
     }
 
 }
