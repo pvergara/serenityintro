@@ -1,8 +1,7 @@
 import net.serenitybdd.annotations.Managed;
 import net.serenitybdd.core.pages.WebElementFacade;
 import net.serenitybdd.junit5.SerenityJUnit5Extension;
-import org.ecos.logic.serenity_intro.data.User;
-import org.ecos.logic.serenity_intro.page.LoginPage;
+import org.ecos.logic.serenity_intro.action.LoginAction;
 import org.ecos.logic.serenity_intro.page.ProductDetailPage;
 import org.ecos.logic.serenity_intro.page.ProductPage;
 import org.junit.jupiter.api.Test;
@@ -16,7 +15,7 @@ import static org.ecos.logic.serenity_intro.data.Users.STANDARD;
 class AppTest
 {
     @Managed
-    LoginPage loginPage;
+    LoginAction login;
     @Managed
     ProductPage productPage;
     @Managed
@@ -25,10 +24,10 @@ class AppTest
     @Test
     void checkTheStandardLoginAction(){
         //Arrange
-        loginPage.open();
+        this.login.openThePage();
 
         //Act
-        loginAction(STANDARD);
+        this.login.as(STANDARD);
 
         //Assertions
         WebElementFacade productTitle = productPage.getProductTitle();
@@ -40,10 +39,10 @@ class AppTest
     @Test
     void checkThePerformanceGlitchLoginAction(){
         //Arrange
-        loginPage.open();
+        this.login.openThePage();
 
         //Act
-        loginAction(PERFORMANCE_GLITCH);
+        this.login.as(PERFORMANCE_GLITCH);
 
         //Assertions
         WebElementFacade productTitle = productPage.getProductTitle();
@@ -55,8 +54,11 @@ class AppTest
     @Test
     void accessingToAGivenProductDetail(){
         //Arrange
-        loginPage.open();
-        loginAction(STANDARD);
+        this.login.
+            openThePage().
+            as(STANDARD);
+
+
         WebElementFacade productTitle = productPage.getProductTitle();
         productTitle.shouldBeVisible();
 
@@ -68,9 +70,4 @@ class AppTest
         assertThat(title.getText()).isEqualTo("Back to products");
     }
 
-    private void loginAction(User user) {
-        loginPage.getUserName().sendKeys(user.getUsername());
-        loginPage.getPassword().sendKeys(user.getPassword());
-        loginPage.getLoginButton().click();
-    }
 }
