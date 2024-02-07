@@ -27,6 +27,14 @@ public class SauceDemoStepDefinitions {
         loginAction.openThePage();
     }
 
+    @When("I login with {string} user")
+    public void loginAsGeneralUser(String username){
+        if(username.equalsIgnoreCase("standard"))
+            loginAsStandardUser();
+        if(username.equalsIgnoreCase("performance glitch"))
+            loginAsPerformanceGlitchUser();
+    }
+
     @When("I login with standard user")
     public void loginAsStandardUser(){
         loginAction.as(Users.STANDARD);
