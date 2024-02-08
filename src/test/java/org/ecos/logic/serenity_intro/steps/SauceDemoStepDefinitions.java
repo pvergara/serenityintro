@@ -7,7 +7,7 @@ import net.serenitybdd.annotations.Managed;
 import net.serenitybdd.annotations.Steps;
 import org.ecos.logic.serenity_intro.action.LoginAction;
 import org.ecos.logic.serenity_intro.action.ProductDetailAction;
-import org.ecos.logic.serenity_intro.data.Users;
+import org.ecos.logic.serenity_intro.data.User;
 import org.ecos.logic.serenity_intro.page.ProductDetailPage;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -27,22 +27,10 @@ public class SauceDemoStepDefinitions {
         loginAction.openThePage();
     }
 
-    @When("I login with {string} user")
-    public void loginAsGeneralUser(String username){
-        if(username.equalsIgnoreCase("standard"))
-            loginAsStandardUser();
-        if(username.equalsIgnoreCase("performance glitch"))
-            loginAsPerformanceGlitchUser();
-    }
 
-    @When("I login with standard user")
-    public void loginAsStandardUser(){
-        loginAction.as(Users.STANDARD);
-    }
-
-    @When("I login with performance glitch user")
-    public void loginAsPerformanceGlitchUser(){
-        loginAction.as(Users.PERFORMANCE_GLITCH);
+    @When("I login with {user} user")
+    public void loginAsStandardUser(User user){
+        loginAction.as(user);
     }
 
     @Then("I can verify I'm on the product list")
