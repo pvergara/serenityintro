@@ -12,6 +12,7 @@ Feature: Using sauce demo
   @regression
   @AutomationExercise
   @automation-2
+  @DeleteUserWhenItHasBeenCreated
   Scenario: Create a new user
     Given I access to the main page
     And Click on sign-up button

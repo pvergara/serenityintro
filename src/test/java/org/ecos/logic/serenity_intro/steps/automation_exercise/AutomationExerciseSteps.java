@@ -9,7 +9,10 @@ import org.ecos.logic.serenity_intro.action.automation_exercise.InitialAction;
 import org.ecos.logic.serenity_intro.action.automation_exercise.LoginAction;
 import org.ecos.logic.serenity_intro.page.automation_exercise.AccountCreatedPage;
 import org.ecos.logic.serenity_intro.page.automation_exercise.SignUpPage;
+import org.openqa.selenium.interactions.Action;
+import org.openqa.selenium.interactions.Actions;
 
+import static net.thucydides.core.webdriver.ThucydidesWebDriverSupport.getDriver;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class AutomationExerciseSteps {
@@ -52,8 +55,11 @@ public class AutomationExerciseSteps {
         this.signUpPage.getCity().sendKeys("lerele");
         this.signUpPage.getZipCode().sendKeys("lerele");
         this.signUpPage.getMobileNumber().sendKeys("lerele");
-        this.signUpPage.getSubmitButton().click();
-
+        Action action = new Actions(getDriver()).
+            moveToElement(this.signUpPage.getSubmitButton()).
+            click().
+            build();
+        action.perform();
     }
 
     @Then("I create a user")
