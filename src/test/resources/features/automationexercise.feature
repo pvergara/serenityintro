@@ -1,4 +1,4 @@
-Feature: Using sauce demo
+Feature: Using automation exercise
 
   @regression
   @AutomationExercise
