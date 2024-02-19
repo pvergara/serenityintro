@@ -1,11 +1,13 @@
 package org.ecos.logic.serenity_intro.page.automation_exercise;
 
 import lombok.Getter;
+import net.serenitybdd.annotations.DefaultUrl;
 import net.serenitybdd.core.annotations.findby.FindBy;
 import net.serenitybdd.core.pages.PageObject;
 import net.serenitybdd.core.pages.WebElementFacade;
 
 @Getter
+@DefaultUrl("https://automationexercise.com/signup")
 public class SignUpPage extends PageObject {
     @FindBy(css = "div > h2 > b")
     private WebElementFacade pageTitle;
@@ -27,6 +29,6 @@ public class SignUpPage extends PageObject {
     private WebElementFacade zipCode;
     @FindBy(id = "mobile_number")
     private WebElementFacade mobileNumber;
-    @FindBy(css = "button.btn.btn-default[data-qa=\"create-account\"]")
+    @FindBy(css = "[data-qa='create-account']")
     private WebElementFacade submitButton;
 }
