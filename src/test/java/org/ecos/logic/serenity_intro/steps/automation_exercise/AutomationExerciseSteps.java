@@ -8,11 +8,9 @@ import net.serenitybdd.annotations.Managed;
 import org.ecos.logic.serenity_intro.action.automation_exercise.InitialAction;
 import org.ecos.logic.serenity_intro.action.automation_exercise.LoginAction;
 import org.ecos.logic.serenity_intro.page.automation_exercise.AccountCreatedPage;
+import org.ecos.logic.serenity_intro.page.automation_exercise.AdsPage;
 import org.ecos.logic.serenity_intro.page.automation_exercise.SignUpPage;
-import org.openqa.selenium.interactions.Action;
-import org.openqa.selenium.interactions.Actions;
 
-import static net.thucydides.core.webdriver.ThucydidesWebDriverSupport.getDriver;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class AutomationExerciseSteps {
@@ -24,6 +22,8 @@ public class AutomationExerciseSteps {
     private SignUpPage signUpPage;
     @Managed
     private AccountCreatedPage accountCreatedPage;
+    @Managed
+    private AdsPage adsPage;
 
     @Given("I access to the main page")
     public void iAccessToTheMainPage() {
@@ -46,6 +46,8 @@ public class AutomationExerciseSteps {
 
     @When("I fill expected data to create a user")
     public void createAnUser() {
+        this.adsPage.disablingAdvertisement();
+
         this.signUpPage.getPassword().sendKeys("lerele");
         this.signUpPage.getFirstName().sendKeys("lerele");
         this.signUpPage.getLastName().sendKeys("lerele");
@@ -55,11 +57,7 @@ public class AutomationExerciseSteps {
         this.signUpPage.getCity().sendKeys("lerele");
         this.signUpPage.getZipCode().sendKeys("lerele");
         this.signUpPage.getMobileNumber().sendKeys("lerele");
-        Action action = new Actions(getDriver()).
-            moveToElement(this.signUpPage.getSubmitButton()).
-            click().
-            build();
-        action.perform();
+        this.signUpPage.getSubmitButton().click();
     }
 
     @Then("I create a user")
